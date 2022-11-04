@@ -12,21 +12,25 @@ public class Main {
         currentPlayer = getRandomPlayer(player1, player2);
         while (!gameOver) {
             System.out.println(board);
-           Shot shot  = getShot(currentPlayer);
+            Shot shot = getShot(currentPlayer);
             if (board.correctShoot(shot, currentPlayer)) {
                 if (board.wins()) {
                     System.out.println("Winner:" + currentPlayer.getName());
                     gameOver = true;
                 } else {
-
-                    currentPlayer = changePlayer(currentPlayer, player1, player2);
+                    if (board.checkDraw()) {
+                        System.out.println(board);
+                        System.out.println("IT IS A DRAW: ");
+                        gameOver = true;
+                        currentPlayer = changePlayer(currentPlayer, player1, player2);
+                    }
                 }
 
             }
         }
     }
 
-    public static Shot getShot (Player currentPlayer) {
+    public static Shot getShot(Player currentPlayer) {
 
         System.out.println(currentPlayer.getName() + " (" + currentPlayer.getSymbol() + ")" +
                 " Enter row and col:");
